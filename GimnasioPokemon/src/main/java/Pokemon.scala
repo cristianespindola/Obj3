@@ -18,6 +18,13 @@ class Pokemon (val nombre: String, val experiencia: Int, val energia: Int, val e
   
   def getEstado(): Estado = return estado;
   
+  def realizarActividad(actividad: Actividad): Pokemon ={
+    return actividad.realizar(this)
+  }
+  
+  def realizarRutina(rutina: Rutina): Pokemon ={
+    return rutina.realizar(this)
+  }
   def descansar(): Pokemon ={
     if(estado == null){
       val newPok = new Pokemon(this.nombre,
@@ -32,7 +39,7 @@ class Pokemon (val nombre: String, val experiencia: Int, val energia: Int, val e
     }else{return estado.descansar(this)}  
   }
   
-  def levantarPesas( kilos: Int): Pokemon ={
+  /*def levantarPesas( kilos: Int): Pokemon ={
     if(this.estado == null){
       
         val newPok: Pokemon = new Pokemon(this.nombre, 
@@ -72,7 +79,7 @@ class Pokemon (val nombre: String, val experiencia: Int, val energia: Int, val e
     }
         
   }
-  
+  */
   def verificarEstadoDormido(): Estado ={
    if(this.energia < (energiaMax / 2)){
      return new Dormido()

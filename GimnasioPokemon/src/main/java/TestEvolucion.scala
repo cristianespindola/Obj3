@@ -19,18 +19,20 @@ class TestEvolucion {
     assertEquals(90000, newPepe.getExperiencia())
     
     //evoluciona al subir de exp por levantar pesas
+    val levantarPesas = new LevantarPesas(2)
     val charizard = newPepe.evolucionar()
-    val charizard2 = charizard.levantarPesas(2)
+    val charizard2 = charizard.realizarActividad(levantarPesas)
     assertEquals(270002, charizard2.getExperiencia())
     assertEquals("Charizard", charizard2.especie.getNombre())
   
     // evolucion al subir de exp por nadar
+    val nadar = new Nadar(5)
     val experiencia3 = new Condicion(200) with Experiencia
     val especieWartortle = new Especie("Wartortle", null, null) with Agua
     val especieSquirtle = new Especie("Squirtle", experiencia3, especieWartortle) with Agua
     val squirtle = new Pokemon("Squirtle",130,50,100,80,50, especieSquirtle, null)
     assertEquals(130, squirtle.getExperiencia())
-    val newSquirtle = squirtle.nadar(5)
+    val newSquirtle = squirtle.realizarActividad(nadar)
   
     assertEquals("Wartortle", newSquirtle.especie.getNombre())
   }
@@ -42,8 +44,8 @@ class TestEvolucion {
     
     // pierde energia al no poder evolucionar por intercambiarlo
     val intercambio = new Condicion(0) with Intercambio
-    val especieMachamp = new Especie("Machamp",null, null) with Lucha
-    val especieMachoke = new Especie("Machike",intercambio, especieMachamp) with Lucha
+    val especieMachamp = new Especie("Machamp",null, null) with Pelea
+    val especieMachoke = new Especie("Machike",intercambio, especieMachamp) with Pelea
     val machamp = new Pokemon("Machamp",130,50,100,80,50, especieMachamp, null)
     val machamp2 = machamp.intercambio()
     assertEquals(40,machamp2.getEnergia())
@@ -54,11 +56,11 @@ class TestEvolucion {
     assertEquals("Machamp", machoke2.especie.getNombre())
   }
   
-  @Test
+  /*@Test
   def EvolucionarSegunPiedra():Unit ={
-    val piedraEvolutiva = new PiedraEvolutiva() with Fuego
+    val piedraEvolutiva = new Condicion(0) with Fuego
     val especieRapidash = new Especie("Rapidash", null, null) with Fuego
     val especiePonita = new Especie("Ponita", piedraEvolutiva, especieRapidash) with Fuego
     val poni = new Pokemon("Poni",150,200,300,260,300, especiePonita, null)
-  }
+  }*/
 }

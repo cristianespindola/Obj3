@@ -6,6 +6,79 @@ class TestPrimerasActividades {
   val especieCharmander = new Especie("Charmander", null, null) with Fuego
   val pepe = new Pokemon("Pepe",30,50,100,60,40, especieCharmander, null)
   
+  val especieHitmonchan = new Especie("Hitmonchan", null, null) with Pelea
+  val hitmonchan = new Pokemon("Hitmonchan",30,50,100,60,40, especieHitmonchan, null)
+  
+  val especieGastly = new Especie("Gastly", null, null) with Fantasma
+  val fantasmin = new Pokemon("Fantasmin",30,50,100,60,40, especieGastly, null)
+  
+  val especieMachamp = new Especie("Machamp", null, null) with Pelea
+  val machamp = new Pokemon("Machamp",130,50,100,80,40, especieMachamp, null)
+  
+  val especieSquirtle = new Especie("Squirtle", null, null) with Agua
+  val squirtle = new Pokemon("Squirtle",130,50,100,80,50, especieSquirtle, null)
+  
+  @Test
+  def actividadDescansar(): Unit ={
+    val descansar = new Descansar()
+    assertEquals(50, pepe.getEnergia())
+    val newPepe = pepe.realizarActividad(descansar)
+    assertEquals(100,newPepe.getEnergia())
+  }
+  
+  @Test
+  def levantarPesasPorPokemosDiferentesTiposYPesas(): Unit = {
+    // levantar pesas en estado normal
+    val levantarPesas = new LevantarPesas(10)
+    assertEquals(30, pepe.getExperiencia())
+    val newPepe = pepe.realizarActividad(levantarPesas)
+    assertEquals(40,newPepe.getExperiencia())
+    
+    val especieHitmonchan = new Especie("Hitmonchan", null, null) with Pelea
+    val lucha = new Pokemon("Lucha",30,50,100,60,40, especieHitmonchan, null)
+    assertEquals(30, pepe.getExperiencia())
+    val newLucha = lucha.realizarActividad(levantarPesas)
+    assertEquals(50,newLucha.getExperiencia())
+    
+    // levantar pesas con un tipo de pokemon invalido, Fantasma
+    val especieGastly = new Especie("Gastly", null, null) with Fantasma
+    val fantasmin = new Pokemon("Fantasmin",30,50,100,60,40, especieGastly, null)
+    assertEquals(30, fantasmin.getExperiencia())
+    val newFantasmin = fantasmin.realizarActividad(levantarPesas)
+    assertEquals(30,newFantasmin.getExperiencia()) // queda con la misma experiencia x no poder levantar pesas
+    
+    // levanta pesas un pokemon tipo lucha, y pierde energia por exceso de fuerza
+    val levantarMasPesas = new LevantarPesas(801)
+    val especieMachamp = new Especie("Machamp", null, null) with Pelea
+    val machamp = new Pokemon("Machamp",130,50,100,80,40, especieMachamp, null)
+    assertEquals(130, machamp.getExperiencia())
+    val newMachamp = machamp.realizarActividad(levantarMasPesas)
+    assertEquals(130,newMachamp.getExperiencia())
+    assertEquals(40, newMachamp.getEnergia())
+  }
+  
+  @Test
+  def nadarPorDiferentesTiposDePokemos(): Unit ={
+    
+    val nadar = new Nadar(5) 
+    val especieMachamp = new Especie("Machamp", null, null) with Pelea
+    val machamp = new Pokemon("Machamp",130,50,100,80,40, especieMachamp, null)
+    assertEquals(130, machamp.getExperiencia())
+    val newMachamp = machamp.realizarActividad(nadar)
+    assertEquals(330,newMachamp.getExperiencia())
+    assertEquals(45, newMachamp.getEnergia())
+    
+    val especieSquirtle = new Especie("Squirtle", null, null) with Agua
+    val squirtle = new Pokemon("Squirtle",130,50,100,80,50, especieSquirtle, null)
+    assertEquals(130, squirtle.getExperiencia())
+    val newSquirtle = squirtle.realizarActividad(nadar)
+    assertEquals(330,newSquirtle.getExperiencia())
+    assertEquals(45, newSquirtle.getEnergia())
+    assertEquals(55, newSquirtle.getVelocidad)
+  }
+  /*val especieCharmander = new Especie("Charmander", null, null) with Fuego
+  val pepe = new Pokemon("Pepe",30,50,100,60,40, especieCharmander, null)
+  
   @Test
   def DadoUnPokemonVeoSusAtributos(): Unit ={
     assertEquals("Pepe", pepe.getNombre())
@@ -77,6 +150,6 @@ class TestPrimerasActividades {
     assertEquals(330,newSquirtle.getExperiencia())
     assertEquals(45, newSquirtle.getEnergia())
     assertEquals(55, newSquirtle.getVelocidad)
-  }
+  }*/
   
 }

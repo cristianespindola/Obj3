@@ -58,13 +58,23 @@ trait Agua extends Tipo{
   override def aumentarVelocidadXNadarAgua(velocidad: Int, minutos: Int): Int ={
     return velocidad + minutos
   }
-}
-
-trait Lucha extends Tipo{
+  
   override def aumentarExpXLevantarPesas(experiencia: Int, fuerza: Int, kilos: Int): Int ={
     if(kilos > fuerza * 10){return experiencia}
     else{
       return experiencia + kilos *2}
+  }
+}
+
+trait Pelea extends Tipo{
+  override def aumentarExpXLevantarPesas(experiencia: Int, fuerza: Int, kilos: Int): Int ={
+    if(kilos > fuerza * 10){return experiencia}
+    else{
+      return experiencia + kilos *2}
+  }
+  
+  override def aumentarExpXNadar(experiencia: Int, minutos: Int): Int ={
+    return experiencia + 200
   }
   
 }
@@ -101,6 +111,8 @@ trait Experiencia extends Condiciones{
 trait Intercambio extends Condiciones{
   override def cumpleCondicionAEvolucionar(newPok: Pokemon): Boolean = true
 }
+
+
 
 
 

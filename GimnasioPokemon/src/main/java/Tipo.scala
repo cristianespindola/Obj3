@@ -1,5 +1,5 @@
 
-
+// tipo segun Pokemon
 trait Tipo extends Especie{
   override def getNombre(): String = return nombre;
   
@@ -106,6 +106,8 @@ trait Titan extends Tipo{
 
 
 
+
+// condicon para evolucionar
 trait Condiciones extends Condicion{
     override def cumpleCondicionAEvolucionar(newPok: Pokemon): Boolean = false
 }
@@ -123,6 +125,35 @@ trait Intercambio extends Condiciones{
 }
 
 
+// criterio para analizar la mejor rutina
+  trait MayorNivel extends Criterio{
+  
+    override def caracAVerificar(pokemon: Pokemon): Int ={
+    return pokemon.experiencia
+    }
+  
+    override def caracPorVerificar(pokemon: Pokemon): Int ={
+    return pokemon.experiencia
+    }
+    
+    override def calcular(caracActual:Int, caracAVerificar:Int) :Boolean ={
+      return caracActual > caracAVerificar
+    }
+  }
+  
+  trait MayorEnergia extends Criterio{
+    override def caracAVerificar(pokemon: Pokemon): Int ={
+    return pokemon.energia
+    }
+  
+    override def caracPorVerificar(pokemon: Pokemon): Int ={
+    return pokemon.energia
+    }
+    
+    override def calcular(caracActual:Int, caracAVerificar:Int) :Boolean ={
+      return caracActual > caracAVerificar
+    }
+  }
 
 
 

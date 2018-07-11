@@ -50,11 +50,6 @@ class TestMejorRutina {
     val analizadorRutina2 = new AnalizadorRutina(criterio2)
     val rutinaAnalizada2 = analizadorRutina2.analizar(hitmonchan, rutinas2)
     
-    val r1 = hitmonchan.realizarRutina(rutina1)
-    val r2 = hitmonchan.realizarRutina(rutina2)
-    
-    assertEquals(100, r1.energia)
-    assertEquals(45, r2.energia)
     assertEquals("levantarNadarYDescansar", rutinaAnalizada2)
     
   }

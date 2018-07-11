@@ -3,8 +3,6 @@
 trait Tipo extends Especie{
   override def getNombre(): String = return nombre;
   
-  override def getNombreTipo(): String = "LALALALALALA"
-  
   override def aumentarExpXLevantarPesas(experiencia: Int, fuerza:Int, kilos: Int): Int={
     if(kilos > fuerza * 10){return experiencia}
     else{
@@ -50,7 +48,16 @@ trait Fuego extends Tipo{
   override def getNombreTipo: String = "Fuego"
   
   override  def cambiarEstadoXNadar(estado: Estado): Estado ={
+    print("No puede nadar")
     return new KO()
+  }
+  
+  override def aumentarExpXNadar(experiencia: Int, minutos: Int): Int ={
+    return experiencia  
+  }
+  
+  override def perderEnergiaXNadar(energia: Int, minutos: Int): Int ={
+     return energia
   }
 }
 
@@ -92,7 +99,10 @@ trait Fantasma extends Tipo{
   }
   
 }
-trait Titan extends Tipo{}
+trait Titan extends Tipo{
+   
+  override def getNombreTipo(): String = "LALALALALALA"
+}
 
 
 
